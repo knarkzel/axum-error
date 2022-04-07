@@ -5,7 +5,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/knarkzel/axum-error"
-description = "Flexible concrete Error and Result type for axum"
+description = "Simple error handling with axum"
 documentation = "https://docs.rs/axum-error/"
 
 [dependencies]
