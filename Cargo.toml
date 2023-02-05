@@ -1,18 +1,17 @@
 [package]
 name = "axum-error"
 authors = ["Knarkzel <knarkzel@gmail.com>"]
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/knarkzel/axum-error"
 description = "Simple error handling with axum"
-documentation = "https://docs.rs/axum-error/"
+documentation = "https://docs.rs/axum-error"
 
 [dependencies]
-axum = { version = "~0.5", default-features = false }
+axum = { version = "~0.6", default-features = false }
 eyre = { version = "~0.6", default-features = false }
-fehler = { version = "1.0.0", default-features = false }
 
 [dev-dependencies]
-axum = "0.5"   
-tokio = { version = "1.0", features = ["full"] }
+axum = "0.6"
+tokio = { version = "1", features = ["full"] }

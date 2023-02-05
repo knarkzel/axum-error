@@ -1,23 +1,22 @@
 //! Provides an `Error` type which can be used in a `eyre`-like fashion
-//! for `axum`, as well as simple error handling with `fehler`.
+//! for `axum`
 //!
 //! ```rust
 //! use axum::{response::Html, routing::get, Router};
 //! use std::{fs::read_to_string, net::SocketAddr};
-//! use axum_error::*;
+//! use axum_error::Result;
 //! 
-//! #[throws]
 //! #[tokio::main]
 //! async fn main() {
 //!     let app = Router::new().route("/", get(index));
 //!     axum::Server::bind(&SocketAddr::from(([127, 0, 0, 1], 3000)))
 //!         .serve(app.into_make_service())
-//!         .await?;
+//!         .await
+//!         .unwrap()
 //! }
 //! 
-//! #[throws]
-//! async fn index() -> Html<String> {
-//!     Html(read_to_string("index.html")?)
+//! async fn index() -> Result<Html<String>> {
+//!     Ok(Html(read_to_string("index.html")?))
 //! }
 //! ```
 
@@ -25,7 +24,6 @@ use axum::{
     http::StatusCode,
     response::{IntoResponse, Response},
 };
-pub use fehler::{throws, throw};
 
 /// Error type which implements `IntoResponse`
 #[derive(Debug)]
@@ -42,3 +40,6 @@ impl IntoResponse for Error {
         (StatusCode::INTERNAL_SERVER_ERROR, format!("{:?}", self.0)).into_response()
     }
 }
+
+// Result type
+pub type Result<T, E = Error> = std::result::Result<T, E>;
